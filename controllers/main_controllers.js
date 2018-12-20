@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const connection = require('../config/connection.js');
+
 //set up the routes using the express router
 
 //GET ROUTE
@@ -13,7 +15,11 @@ router.get("/create", function(req, res) {
 });
 
 router.get("/board", function(req, res) {
-    res.render('board');
+    connection.query("SELECT * FROM items", function(err, result) {
+        if(err) throw err;
+        console.log(typeof result);
+        res.render('board', {items: result});
+    });
 });
 
 module.exports = router;
