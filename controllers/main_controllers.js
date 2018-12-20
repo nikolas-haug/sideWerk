@@ -17,6 +17,7 @@ router.get("/create", function(req, res) {
 router.get("/board", function(req, res) {
     connection.query("SELECT * FROM items", function(err, result) {
         if(err) throw err;
+        console.log(JSON.stringify(result));
         console.log(typeof result);
         res.render('board', {items: result});
     });

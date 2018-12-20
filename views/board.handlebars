@@ -2,4 +2,18 @@
 
 {{#each items}}
     <h2>{{ this.item_name }}</h2>
+    <button class="item-btn" data-item_name="{{this.item_name}}">{{this.item_name}}</button>
 {{/each}}
+
+<script>
+
+    const itemButtons = document.querySelectorAll('.item-btn');
+
+    itemButtons.forEach(itemBtn => itemBtn.addEventListener('click', getData));
+
+    function getData(e) {
+        console.log(e.target.dataset);
+        console.log(e.target.dataset.item_name);
+    }
+
+</script>
