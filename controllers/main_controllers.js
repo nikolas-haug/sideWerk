@@ -8,4 +8,12 @@ router.get("/", function(req, res) {
     res.render('index');
 });
 
+router.get("/create", function(req, res) {
+    res.render('create');
+});
+
+router.get("/board", function(req, res) {
+    res.render('board');
+});
+
 module.exports = router;
