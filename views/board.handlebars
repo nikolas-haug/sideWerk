@@ -1,9 +1,12 @@
 <h1>board page</h1>
 
-{{#each items}}
-    <h2 class="item-btn" data-item_name="{{this.item_name}}">{{ this.item_name }}</h2>
-    {{!-- <button class="item-btn" data-item_name="{{this.item_name}}">{{this.item_name}}</button> --}}
-{{/each}}
+<form onsubmit="addNewList(newList); return false">
+    {{#each items}}
+        <h2 class="item-btn" data-item_name="{{this.item_name}}">{{ this.item_name }}</h2>
+        {{!-- <button class="item-btn" data-item_name="{{this.item_name}}">{{this.item_name}}</button> --}}
+    {{/each}}
+    <button>submit</button>
+</form>
 
 <script>
 
@@ -17,6 +20,9 @@
     function getData(e) {
         console.log(e.target.dataset);
         console.log(e.target.dataset.item_name);
+        console.log(this);
+        // remove clicked item from DOM
+        this.style.display = 'none';
         // get the new item data
         let newItem = e.target.dataset.item_name;
         // add it to the new items array
@@ -27,6 +33,13 @@
         }
         console.log(newList);
         // TO DO - MAKE POST ROUTE TO HANDLE THE NEW REQUEST FOR THE DATABASE
+    }
+
+    // function to handle the form submit after the new list has been created
+    // send new data to post route in the database to create new list
+    function addNewList(list) {
+        console.log("new list submitted!")
+        console.log(list);
     }
 
 </script>
