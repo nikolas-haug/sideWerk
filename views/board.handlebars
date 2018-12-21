@@ -1,11 +1,14 @@
 <h1>board page</h1>
 
 {{#each items}}
-    <h2>{{ this.item_name }}</h2>
-    <button class="item-btn" data-item_name="{{this.item_name}}">{{this.item_name}}</button>
+    <h2 class="item-btn" data-item_name="{{this.item_name}}">{{ this.item_name }}</h2>
+    {{!-- <button class="item-btn" data-item_name="{{this.item_name}}">{{this.item_name}}</button> --}}
 {{/each}}
 
 <script>
+
+    let newList = {};
+    let newItems = [];
 
     const itemButtons = document.querySelectorAll('.item-btn');
 
@@ -14,6 +17,16 @@
     function getData(e) {
         console.log(e.target.dataset);
         console.log(e.target.dataset.item_name);
+        // get the new item data
+        let newItem = e.target.dataset.item_name;
+        // add it to the new items array
+        newItems.push(newItem);
+        // add the new items array to the new list object
+        newList = {
+            items: newItems
+        }
+        console.log(newList);
+        // TO DO - MAKE POST ROUTE TO HANDLE THE NEW REQUEST FOR THE DATABASE
     }
 
 </script>
