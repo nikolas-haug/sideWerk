@@ -1,12 +1,12 @@
 <h1>board page</h1>
 
-<form onsubmit="addNewList(newList); return false">
+{{!-- <form onsubmit="addNewList(newList)" method="POST"> --}}
     {{#each items}}
         <h2 class="item-btn" data-item_name="{{this.item_name}}">{{ this.item_name }}</h2>
         {{!-- <button class="item-btn" data-item_name="{{this.item_name}}">{{this.item_name}}</button> --}}
     {{/each}}
-    <button>submit</button>
-</form>
+    <button id="create-list-btn" onclick="addNewList()">submit</button>
+{{!-- </form> --}}
 
 <script>
 
@@ -37,9 +37,22 @@
 
     // function to handle the form submit after the new list has been created
     // send new data to post route in the database to create new list
-    function addNewList(list) {
-        console.log("new list submitted!")
-        console.log(list);
+    function addNewList() {
+        
+        $.ajax({
+            
+            type: 'POST',
+            url: "/list/create",
+            data: newList,
+            dataType: "text",
+            success: function(resultData) { 
+                console.log(resultData);
+                window.location.href = "/";
+            }
+        }); 
+    
     }
+
+    
 
 </script>

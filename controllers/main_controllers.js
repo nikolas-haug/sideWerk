@@ -23,4 +23,11 @@ router.get("/board", function(req, res) {
     });
 });
 
+// POST ROUTE - for adding new lists to database
+router.post("/list/create", function(req, res) {
+    console.log("post route connected!");
+    console.log(req.body);
+    res.redirect("/");
+});
+
 module.exports = router;
