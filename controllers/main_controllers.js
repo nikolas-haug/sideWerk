@@ -10,9 +10,13 @@ router.get("/", function(req, res) {
     res.render('index');
 });
 
-// GET ROUTE
+// GET ROUTE - to display all the boards saved in the db
 router.get("/board", function(req, res) {
-    res.render('board');
+    connection.query("SELECT * FROM list", function(err, result) {
+        if(err) throw err;
+        console.log(result);
+        res.render('board', {lists: result});
+    });
 });
 
 // GET ROUTE - for the main create board page
@@ -68,6 +72,19 @@ router.post("/list/create", function(req, res) {
     });
     // redirect the user to a different route
     res.redirect("/");
+});
+
+// GET ROUTE - for the individual list pages
+router.get("/list/:id", function(req, res) {
+    // res.send(`connected at ${req.params.id}`);
+    // create the list id variable
+    let listID = req.params.id;
+
+    connection.query("SELECT * FROM list_items WHERE listID = (?)", [listID], function(err, result) {
+        if(err) throw err;
+        console.log(result);
+        res.render('list', {list: result});
+    });
 });
 
 module.exports = router;

@@ -1,1 +1,33 @@
 <h1>Boards Page</h1>
+
+{{#each lists}}
+    <h4 class="list-btn" data-list_id="{{this.id}}">{{this.list_name}}</h4>
+{{/each}}
+
+<script>
+
+    // make the variables
+    const listButtons = document.querySelectorAll('.list-btn');
+
+    listButtons.forEach(listBtn => listBtn.addEventListener('click', getListData));
+
+    function getListData(e) {
+
+        console.log(e);
+
+        let listButtonDataId = e.target.dataset.list_id;
+        
+        $.ajax({
+            
+            type: 'GET',
+            url: `/list/${listButtonDataId}`,
+            dataType: "text",
+            success: function(resultData) { 
+                console.log(resultData);
+                window.location.href = `/list/${listButtonDataId}`;
+            }
+        }); 
+
+    }
+
+</script>
