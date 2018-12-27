@@ -14,8 +14,16 @@ CREATE TABLE items(
 CREATE TABLE list(
     id INT AUTO_INCREMENT NOT NULL,
     list_name VARCHAR(100) NOT NULL,
+
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE list_items(
+    id INT AUTO_INCREMENT NOT NULL,
     task_name VARCHAR(100) NOT NULL,
     completed BOOLEAN NOT NULL DEFAULT 0,
+    listID INT,
+    FOREIGN KEY (listID) REFERENCES list(id),
 
     PRIMARY KEY (id)
 );

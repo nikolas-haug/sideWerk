@@ -1,6 +1,8 @@
 <h1>board page</h1>
 
 {{!-- <form onsubmit="addNewList(newList)" method="POST"> --}}
+    <h4>list name:</h4>
+    <input type="text" id="list_name">
     {{#each items}}
         <h2 class="item-btn" data-item_name="{{this.item_name}}">{{ this.item_name }}</h2>
         {{!-- <button class="item-btn" data-item_name="{{this.item_name}}">{{this.item_name}}</button> --}}
@@ -12,6 +14,9 @@
 
     let newList = {};
     let newItems = [];
+
+    // get the list name input
+    const listName = document.querySelector('#list_name');
 
     const itemButtons = document.querySelectorAll('.item-btn');
 
@@ -28,9 +33,7 @@
         // add it to the new items array
         newItems.push(newItem);
         // add the new items array to the new list object
-        newList = {
-            items: newItems
-        }
+        
         console.log(newList);
         // TO DO - MAKE POST ROUTE TO HANDLE THE NEW REQUEST FOR THE DATABASE
     }
@@ -38,6 +41,13 @@
     // function to handle the form submit after the new list has been created
     // send new data to post route in the database to create new list
     function addNewList() {
+
+        alert(listName.value);
+
+        newList = {
+            items: newItems,
+            listName: listName.value
+        }
         
         $.ajax({
             
