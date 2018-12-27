@@ -11,16 +11,16 @@ router.get("/", function(req, res) {
 });
 
 // GET ROUTE
-router.get("/create", function(req, res) {
-    res.render('create');
+router.get("/board", function(req, res) {
+    res.render('board');
 });
 
 // GET ROUTE - for the main create board page
-router.get("/board", function(req, res) {
+router.get("/create", function(req, res) {
     connection.query("SELECT * FROM items", function(err, result) {
         if(err) throw err;
         // console.log(result);
-        res.render('board', {items: result});
+        res.render('create', {items: result});
     });
 });
 
