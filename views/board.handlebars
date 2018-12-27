@@ -17,32 +17,23 @@
 
     // get the list name input
     const listName = document.querySelector('#list_name');
-
+    // select the buttons for click events
     const itemButtons = document.querySelectorAll('.item-btn');
-
+    // add click listeners to each button
     itemButtons.forEach(itemBtn => itemBtn.addEventListener('click', getData));
 
     function getData(e) {
-        console.log(e.target.dataset);
-        console.log(e.target.dataset.item_name);
-        console.log(this);
         // remove clicked item from DOM
         this.style.display = 'none';
         // get the new item data
         let newItem = e.target.dataset.item_name;
         // add it to the new items array
         newItems.push(newItem);
-        // add the new items array to the new list object
-        
-        console.log(newList);
-        // TO DO - MAKE POST ROUTE TO HANDLE THE NEW REQUEST FOR THE DATABASE
     }
 
     // function to handle the form submit after the new list has been created
     // send new data to post route in the database to create new list
     function addNewList() {
-
-        alert(listName.value);
 
         newList = {
             items: newItems,
