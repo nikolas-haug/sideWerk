@@ -1,8 +1,10 @@
-<h1>Boards Page</h1>
+<h1>Board Page</h1>
 
 {{#each lists}}
     <h4 class="list-btn" data-list_id="{{this.id}}">{{this.list_name}}</h4>
 {{/each}}
+
+    <a href="/create">create new list</a>
 
 <script>
 
@@ -13,8 +15,6 @@
 
     function getListData(e) {
 
-        console.log(e);
-
         let listButtonDataId = e.target.dataset.list_id;
         
         $.ajax({
@@ -22,8 +22,7 @@
             type: 'GET',
             url: `/list/${listButtonDataId}`,
             dataType: "text",
-            success: function(resultData) { 
-                console.log(resultData);
+            success: function(resultData) {
                 window.location.href = `/list/${listButtonDataId}`;
             }
         }); 
