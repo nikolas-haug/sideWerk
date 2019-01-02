@@ -12,7 +12,8 @@ if(process.env.JAWSDB_URL) {
         user: "root",
         password: "root",
         database: "sidewerk_dev",
-        socketPath: "/Applications/MAMP/tmp/mysql/mysql.sock"
+        socketPath: "/Applications/MAMP/tmp/mysql/mysql.sock",
+        multipleStatements: true
     });
 }
 
