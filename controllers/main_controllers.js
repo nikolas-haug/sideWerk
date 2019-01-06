@@ -37,10 +37,12 @@ router.post("/list/create", function(req, res) {
     // make the database query variables
     let listName = req.body.listName;
     let items = req.body.items;
+    // get the username data to attach to list
+    let list_owner = req.user.username;
 
     // FIRST
     // for the list name
-    const listNameQueryString = "INSERT INTO list (list_name) VALUES (?)";
+    const listNameQueryString = "INSERT INTO list (list_name, list_owner) VALUES (?, ?)";
 
     // SECOND
     // for retrieving the list id
@@ -51,7 +53,7 @@ router.post("/list/create", function(req, res) {
     const ItemQueryString = "INSERT INTO list_items (task_name, listID) VALUES (?, ?)";
     
     // mysql query for adding the new list to db
-    connection.query(listNameQueryString, [listName], function(err, result) {
+    connection.query(listNameQueryString, [listName, list_owner], function(err, result) {
         if(err) throw err;
         console.log(result);
     });
@@ -83,11 +85,26 @@ router.get("/list/:id", function(req, res) {
     // create the list id variable
     let listID = req.params.id;
 
-    connection.query("SELECT * FROM list_items WHERE listID = (?); SELECT list_name FROM list WHERE id = (?)", [listID, listID], function(err, result) {
+    connection.query("SELECT * FROM list_items WHERE listID = (?); SELECT list_name FROM list WHERE id = (?);", [listID, listID], function(err, result) {
         if(err) throw err;
         // console.log(result[1][0].list_name);
-        res.render('list', {list: result[0], name: result[1][0].list_name});
+        res.render('list', {list: result[0], name: result[1][0].list_name, listID: listID});
     });
+});
+
+// POST ROUTE for joining an existing list on the board
+router.post("/list/join", function(req, res) {
+    // let listJoiner = req.user.username;
+    // get the list id to add the new user to
+    // let listId = req.body.listId;
+    console.log(req.body);
+
+    // console.log(listId);
+
+    // connection.query("INSERT INTO list (list_joiners) WHERE id = (?) VALUES (?)", [listId, listJoiner], function(err, result) {
+    //     if(err) throw err;
+    //     res.redirect("/board");
+    // });
 });
 
 module.exports = router;

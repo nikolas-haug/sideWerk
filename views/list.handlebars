@@ -1,8 +1,37 @@
 <h1>Single list page</h1>
 <h2>{{name}}</h2>
 
+<p>list ID: {{listID}}</p>
+
 {{#each list}}
     <h4>{{this.task_name}}</h4>
 {{/each}}
 
 <a href="/board">back to list board</a>
+
+<a id="join-btn" data-list_id="{{listID}}">join this list</a>
+
+<script>
+
+    document.querySelector('#join-btn').addEventListener('click', function(e) {
+
+        console.log(e);
+
+        let listId = e.target.dataset.list_id;
+        console.log(listId);
+
+         $.ajax({
+            
+            type: 'POST',
+            url: "/list/join",
+            data: listId,
+            dataType: "text",
+            success: function(resultData) { 
+                console.log(resultData);
+                window.location.href = "/";
+            }
+        }); 
+
+    });
+
+</script>
