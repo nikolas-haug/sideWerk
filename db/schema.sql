@@ -27,3 +27,15 @@ CREATE TABLE list_items(
 
     PRIMARY KEY (id)
 );
+
+CREATE TABLE users(
+    id INT AUTO_INCREMENT NOT NULL,
+    username VARCHAR(20) NOT NULL,
+    password CHAR(60) NOT NULL,
+        
+    PRIMARY KEY (id)
+
+    UNIQUE INDEX id_UNIQUE (id ASC),
+    UNIQUE INDEX username_UNIQUE (username ASC)
+
+);
