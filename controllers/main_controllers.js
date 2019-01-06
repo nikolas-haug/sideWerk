@@ -8,6 +8,9 @@ const connection = require('../config/connection.js');
 //GET ROUTE
 router.get("/", function(req, res) {
     res.render('index');
+    if(req.user) {
+        // console.log(req.user.username);
+    }
 });
 
 // GET ROUTE - to display all the boards saved in the db

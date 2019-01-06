@@ -14,6 +14,7 @@ CREATE TABLE items(
 CREATE TABLE list(
     id INT AUTO_INCREMENT NOT NULL,
     list_name VARCHAR(100) NOT NULL,
+    list_owner VARCHAR(100) NOT NULL,
 
     PRIMARY KEY (id)
 );
