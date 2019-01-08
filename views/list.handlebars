@@ -27,9 +27,7 @@
          $.ajax({
             
             type: 'POST',
-            url: "/list/join",
-            data: listId,
-            dataType: "text",
+            url: `/list/join/${listId}`,
             success: function(resultData) { 
                 console.log(resultData);
                 window.location.href = "/";

@@ -93,18 +93,20 @@ router.get("/list/:id", function(req, res) {
 });
 
 // POST ROUTE for joining an existing list on the board
-router.post("/list/join", function(req, res) {
-    // let listJoiner = req.user.username;
+router.post("/list/join/:id", function(req, res) {
+
+    let listJoiner = req.user.username;
     // get the list id to add the new user to
-    // let listId = req.body.listId;
-    console.log(req.body);
+    let listId = JSON.parse(req.params.id);
+    
+    console.log(req.params.id);
 
     // console.log(listId);
 
-    // connection.query("INSERT INTO list (list_joiners) WHERE id = (?) VALUES (?)", [listId, listJoiner], function(err, result) {
-    //     if(err) throw err;
-    //     res.redirect("/board");
-    // });
+    connection.query("UPDATE list SET list_joiners = (?) WHERE id = (?)", [listJoiner, listId], function(err, result) {
+        if(err) throw err;
+        res.redirect("/board");
+    });
 });
 
 module.exports = router;
