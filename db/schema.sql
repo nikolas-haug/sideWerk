@@ -40,3 +40,12 @@ CREATE TABLE users(
     UNIQUE INDEX username_UNIQUE (username ASC)
 
 );
+
+CREATE TABLE list_joiners(
+    id INT AUTO_INCREMENT NOT NULL,
+    joiner VARCHAR(100) NOT NULL,
+    listID INT,
+    FOREIGN KEY (listID) REFERENCES list(id),
+
+    PRIMARY KEY (id)
+);

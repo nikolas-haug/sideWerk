@@ -1,7 +1,21 @@
 const express = require("express");
 const router = express.Router();
 
+// TO DO - check if passport is needed for middleware function
+// const passport = require('passport');
+
 const connection = require('../config/connection.js');
+
+// route middleware to make sure
+function isLoggedIn(req, res, next) {
+
+	// if user is authenticated in the session, carry on
+	if (req.isAuthenticated())
+		return next();
+
+	// if they aren't redirect them to the home page
+	res.redirect('/');
+}
 
 //set up the routes using the express router
 
@@ -14,7 +28,7 @@ router.get("/", function(req, res) {
 });
 
 // GET ROUTE - to display all the boards saved in the db
-router.get("/board", function(req, res) {
+router.get("/board", isLoggedIn, function(req, res) {
     connection.query("SELECT * FROM list", function(err, result) {
         if(err) throw err;
         console.log(result);
@@ -23,7 +37,7 @@ router.get("/board", function(req, res) {
 });
 
 // GET ROUTE - for the main create board page
-router.get("/create", function(req, res) {
+router.get("/create", isLoggedIn, function(req, res) {
     connection.query("SELECT * FROM items", function(err, result) {
         if(err) throw err;
         // console.log(result);
@@ -88,7 +102,7 @@ router.get("/list/:id", function(req, res) {
     connection.query("SELECT * FROM list_items WHERE listID = (?); SELECT list_name FROM list WHERE id = (?);", [listID, listID], function(err, result) {
         if(err) throw err;
         // console.log(result[1][0].list_name);
-        res.render('list', {list: result[0], name: result[1][0].list_name, listID: listID});
+        res.render('list', {list: result[0], name: result[1][0].list_name, listID: listID, user: req.user.username});
     });
 });
 
@@ -97,16 +111,23 @@ router.post("/list/join/:id", function(req, res) {
 
     let listJoiner = req.user.username;
     // get the list id to add the new user to
-    let listId = JSON.parse(req.params.id);
+    let listId = req.params.id;
     
     console.log(req.params.id);
 
     // console.log(listId);
 
-    connection.query("UPDATE list SET list_joiners = (?) WHERE id = (?)", [listJoiner, listId], function(err, result) {
+    // add the currently logged in user to the selected list with reference to its ID
+    connection.query("INSERT INTO list_joiners (joiner, listID) VALUES (?, ?)", [listJoiner, listId], function(err, result) {
         if(err) throw err;
+        console.log(result);
         res.redirect("/board");
     });
+
+    // connection.query("UPDATE list SET list_joiners = (?) WHERE id = (?)", [listJoiner, listId], function(err, result) {
+    //     if(err) throw err;
+    //     res.redirect("/board");
+    // });
 });
 
 module.exports = router;
