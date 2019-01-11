@@ -99,10 +99,16 @@ router.get("/list/:id", function(req, res) {
     // create the list id variable
     let listID = req.params.id;
 
-    connection.query("SELECT * FROM list_items WHERE listID = (?); SELECT list_name FROM list WHERE id = (?);", [listID, listID], function(err, result) {
+    connection.query("SELECT * FROM list_items WHERE listID = (?); SELECT list_name FROM list WHERE id = (?); SELECT list_owner FROM list WHERE id = (?); SELECT * FROM list_joiners WHERE listID = (?)", [listID, listID, listID, listID], function(err, result) {
         if(err) throw err;
         // console.log(result[1][0].list_name);
-        res.render('list', {list: result[0], name: result[1][0].list_name, listID: listID, user: req.user.username});
+        res.render('list', {list: result[0], 
+                            name: result[1][0].list_name,
+                            list_owner: result[2][0].list_owner, 
+                            listID: listID, 
+                            user: req.user.username,
+                            joiners: result[3]
+                        });
     });
 });
 

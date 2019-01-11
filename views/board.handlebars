@@ -2,10 +2,17 @@
 
 <a href="/">Home</a>
 <a href="/logout">logout</a>
+<a href="/profile">Profile</a>
+
+<hr>
+
+<h1>Available Lists</h1>
 
 {{#each lists}}
     <h4 class="list-btn" data-list_id="{{this.id}}">{{this.list_name}}</h4>
 {{/each}}
+
+<hr>
 
     <a href="/create">create new list</a>
 

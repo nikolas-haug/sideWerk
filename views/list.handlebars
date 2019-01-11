@@ -2,20 +2,35 @@
 
 <a href="/">Home</a>
 <a href="logout"></a>
+<a href="/profile">Profile</a>
 
-<h2>{{name}}</h2>
+<hr>
 
-<h3>{{user}}</h3>
+<h2>List name: {{name}}</h2>
+
+<h2>List owner: {{list_owner}}</h2>
+
+<p>Current user: {{user}}</p>
 
 <p>list ID: {{listID}}</p>
 
+{{#if joiners}}
+<h2>People added to list:</h2>
+    {{#each joiners}}
+        <p>{{this.joiner}}</p>
+    {{/each}}
+{{/if}}
+
+<h1>List Items</h1>
 {{#each list}}
     <h4>{{this.task_name}}</h4>
 {{/each}}
 
+<hr>
+
 <a href="/board">back to list board</a>
 
-<a id="join-btn" data-list_id="{{listID}}">join this list</a>
+<button id="join-btn" data-list_id="{{listID}}">join this list</button>
 
 <script>
 
@@ -32,7 +47,7 @@
             url: `/list/join/${listId}`,
             success: function(resultData) { 
                 console.log(resultData);
-                window.location.href = "/";
+                window.location.href = "/board";
             }
         }); 
 
