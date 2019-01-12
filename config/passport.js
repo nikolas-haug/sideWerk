@@ -53,6 +53,7 @@ module.exports = function(passport) {
                 if (err)
                     return done(err);
                 if (rows.length) {
+                    console.log("user name already taken");
                     return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
                 } else {
                     // if there is no user with that username
