@@ -68,6 +68,8 @@ module.exports = function(app, passport) {
 	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');
+		// TO DO - render a logout message for the user
+		// res.render('/index', { message: req.flash('you have been logged out!') });
 	});
 };
 
