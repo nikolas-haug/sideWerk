@@ -1,7 +1,15 @@
 /*Main styles  */
 body {
-    background-color: blue;
+    background-color: white;
 
+}
+
+
+/* styles for login page */
+.homepage{
+  background-color: grey;
+  max-width: 500px;
+  padding: 2rem;
 }
 
 
