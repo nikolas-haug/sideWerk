@@ -20,7 +20,132 @@
   <h1>Homepage</h1>
   <h2>WERK</h2>
 
+  <!--User Profile Sidebar -->
 
+  <div class="container emp-profile">
+              <form method="post">
+                  <div class="row">
+                      <div class="col-md-4">
+                          <div class="profile-img">
+                              <img src="../images/cat.jpg" alt="grey and white kitten"/>
+                              <!--add php or javascript to change photo later  -->
+                              <div class="file btn btn-lg btn-primary">
+                                  Change Photo
+                                  <input type="file" name="file"/>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="profile-head">
+                                      <h5>
+                                          Moby the Cat
+                                      </h5>
+                                      <h6>
+                                          Server
+                                      </h6>
+
+                              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                  <li class="nav-item">
+                                      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">General</a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">SideWerk</a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a class="nav-link" id="leader-tab" data-toggle="tab" href="#leader" role="tab" aria-controls="profile" aria-selected="false">Leader board</a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                      <div class="col-md-2">
+                          <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-4">
+                          <div class="profile-work">
+                              <p>About</p>
+                              <a href="#">Moby the Cat</a><br/>
+                              <a href="#">Server</a><br/>
+                              <a href="#">Redstag</a>
+
+                          </div>
+                      </div>
+                      <div class="col-md-8">
+                          <div class="tab-content profile-tab" id="myTabContent">
+                            <!--General tab content start  -->
+                              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                          <div class="row">
+                                              <div class="col-md-6">
+                                                  <label>User Id</label>
+                                              </div>
+                                              <div class="col-md-6">
+                                                  <p>sideWerk</p>
+                                              </div>
+                                          </div>
+                                          <div class="row">
+                                              <div class="col-md-6">
+                                                  <label>Name</label>
+                                              </div>
+                                              <div class="col-md-6">
+                                                  <p>Moby the Cat</p>
+                                              </div>
+                                          </div>
+                                          <div class="row">
+                                              <div class="col-md-6">
+                                                  <label>Email</label>
+                                              </div>
+                                              <div class="col-md-6">
+                                                  <p>Moby-the-cat@hotmail.com</p>
+                                              </div>
+                                          </div>
+                                          <div class="row">
+                                              <div class="col-md-6">
+                                                  <label>Phone</label>
+                                              </div>
+                                              <div class="col-md-6">
+                                                  <p>(612) 666-6969</p>
+                                              </div>
+                                          </div>
+                                          <div class="row">
+                                              <div class="col-md-6">
+                                                  <label>Job title</label>
+                                              </div>
+                                              <div class="col-md-6">
+                                                  <p>Server</p>
+                                              </div>
+                                          </div>
+                              </div>
+                              <!-- Gen tab ends -->
+
+
+                              <!--'Sidewerk tab starts'  -->
+
+                              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div id="myDIV" class="header">
+                               <h2 style="margin:5px">sideWerk</h2>
+                              <input type="text" id="myInput" placeholder="Title...">
+                              <span onclick="newElement()" class="addBtn">Add</span>
+                              </div>
+
+                             <ul id="myUL">
+                             <li>Fold Linens</li>
+                             <li class="checked">Polish Sliverware</li>
+                             <li>Marry Jams</li>
+                             <li>Marry Syrups</li>
+                             <li>Hookie Section</li>
+                             <li>Restock To-goes</li>
+                             </ul>
+                            </div>
+
+                            <!--'Sidewerk tab ends'  -->
+
+                            <!--leader board tab starts  -->
+<div class="tab-pane fade show active" id="leaderboard" role="tabpanel" aria-labelledby="home-tab">
+
+  </div>
+
+                            <!--leader board tab ends  -->
 
 
 
