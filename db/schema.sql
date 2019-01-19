@@ -44,6 +44,7 @@ CREATE TABLE users(
 CREATE TABLE list_joiners(
     id INT AUTO_INCREMENT NOT NULL,
     joiner VARCHAR(100) NOT NULL,
+    confirmed BOOLEAN NOT NULL DEFAULT 0,
     listID INT,
     FOREIGN KEY (listID) REFERENCES list(id),
 

@@ -14,12 +14,20 @@
 
 <p>list ID: {{listID}}</p>
 
-{{#if joiners}}
+{{!-- {{#if joiners}}
 <h2>People added to list:</h2>
     {{#each joiners}}
         <p>{{this.joiner}}</p>
     {{/each}}
-{{/if}}
+{{/if}} --}}
+
+{{#each joiners}}
+    {{#if joiners.confirmed}}
+        <p>{{this.joiner}}</p>
+    {{/if}}
+{{/each}}
+
+{{!-- #each: joiners, if joiners.confirmed: this.joiner (name) --}}
 
 <h1>List Items</h1>
 {{#each list}}
@@ -35,6 +43,9 @@
 <script>
 
     document.querySelector('#join-btn').addEventListener('click', function(e) {
+
+        // TO DO - make this a modal etc to alert the user after join
+        alert("list joined!");
 
         console.log(e);
 
