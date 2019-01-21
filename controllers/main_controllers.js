@@ -136,4 +136,27 @@ router.post("/list/join/:id", function(req, res) {
     // });
 });
 
+// GET route for the user's created lists
+router.get("/owned", function(req, res) {
+    // get the user data
+    let user = req.user.username;
+
+    // get all the user's owned lists from the db
+    connection.query("SELECT * FROM list WHERE list_owner = (?)", [user], function(err, result) {
+        if(err) throw err;
+        res.render('user_lists', {user_lists: result});
+    });
+});
+
+// GET route for the user's joined lists
+router.get("/joined", function(req, res) {
+    //get the user data
+    let user = req.user.username;
+
+    //get the user's joined lists from the db
+
+
+    res.render('joined');
+});
+
 module.exports = router;
