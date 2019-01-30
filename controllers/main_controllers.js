@@ -21,9 +21,12 @@ function isLoggedIn(req, res, next) {
 
 //GET ROUTE
 router.get("/", function(req, res) {
-    res.render('index');
+    // res.render('index');
     if(req.user) {
         // console.log(req.user.username);
+        res.render('index', {user: req.user.username})
+    } else {
+        res.render('index');
     }
 });
 
@@ -181,7 +184,7 @@ router.get("/home", isLoggedIn, function(req, res) {
     connection.query("SELECT * FROM list WHERE list_owner = (?); SELECT T1.list_name, confirmed FROM list AS T1 INNER JOIN list_joiners AS T2 ON T1.id = T2.listID WHERE T2.joiner = (?) GROUP BY listID", [user, user], function(err, result) {
         if(err) throw err;
         // console.log(result);
-        console.log(result[1]);
+        // console.log(result[1]);
         res.render('home', {
                         user_lists: result[0],
                         joined_lists: result[1]

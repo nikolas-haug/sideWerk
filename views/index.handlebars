@@ -9,8 +9,11 @@
 
 <br>
 
-<a href="/login">Login</a>
-<a href="/signup">Sign up</a>
+{{!-- check if a user is logged in - conditionally render login/signup --}}
+{{#unless user}}
+    <a href="/login">Login</a>
+    <a href="/signup">Sign up</a>
+{{/unless}}
 
 <hr>
 

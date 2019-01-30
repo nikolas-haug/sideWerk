@@ -24,9 +24,11 @@
         {{/each}}
     </ul> --}}
     {{#each user_lists}}
-        <p>{{this.list_name}}</p>
+        <p>{{this.list_name}} </p>
     {{/each}}
 {{/if}}
+
+{{!-- <span><button>view/edit</button></span> --}}
 
 {{!-- {{#if joined_lists.confirmed}} --}}
 
@@ -37,7 +39,7 @@
             <p>{{this.list_name}}</p>
             <button>Proceed to list</button>
             {{else}}
-            <h5>{{this.list_name}} --> <span>PENDING APPROUVAL!</span></h5>
+            <h5>{{this.list_name}} --> <span>PENDING APPROVAL!</span></h5>
         {{/if}}
     {{/each}}
 
