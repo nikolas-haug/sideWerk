@@ -34,6 +34,10 @@
 
     <hr>
 
+    {{#if joined_lists}}
+        <h2>Lists You've Joined</h2>
+    {{/if}}
+
     {{#each joined_lists}}
         {{#if this.confirmed}}
             <p>{{this.list_name}}</p>
