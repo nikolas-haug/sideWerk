@@ -159,6 +159,20 @@ router.get("/joined", function(req, res) {
     });
 });
 
+// GET route - for the main/home page after sign in/up
+router.get("/home", isLoggedIn, function(req, res) {
+    let user = req.user.username;
+    // TO DO - make the query string variables for each separate query
+    connection.query("SELECT * FROM list WHERE list_owner = (?); SELECT list_name FROM list INNER JOIN list_joiners ON list.id = list_joiners.listID WHERE (list_joiners.joiner = ? AND list_joiners.confirmed = true)", [user, user], function(err, result) {
+        if(err) throw err;
+        console.log(result);
+        res.render('home', {
+                        user_lists: result[0],
+                        joined_lists: result[1]
+        });
+    });
+});
+
 // // GET route for the user's joined lists
 // router.get("/joined", function(req, res) {
 //     // get the user data

@@ -11,3 +11,29 @@
 {{!-- view the lists you've created or joined --}}
 <a href="/owned">View your created lists</a>
 <a href="/joined">Your joined lists</a>
+
+<hr>
+
+{{!-- display the user's owned and joined lists if they exist --}}
+
+{{#if user_lists}}
+    <h1>Your Created Lists</h1>
+    {{!-- <ul>
+        {{#each user_lists}}
+            <li>{{this.list_name}}</li>
+        {{/each}}
+    </ul> --}}
+    {{#each user_lists}}
+        <p>{{this.list_name}}</p>
+    {{/each}}
+{{/if}}
+
+<hr>
+
+{{#if joined_lists}}
+    <h1>Lists You've Joined</h1>
+    {{#each joined_lists}}
+        <p>{{this.list_name}}</p>
+    {{/each}}
+{{/if}}
+
