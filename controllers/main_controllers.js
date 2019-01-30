@@ -136,6 +136,10 @@ router.post("/list/join/:id", function(req, res) {
     // });
 });
 
+// =====================================
+// TEST ROUTES FOR HOME PAGE LOGIC
+// =====================================
+
 // GET route for the user's created lists
 router.get("/owned", function(req, res) {
     // get the user data
@@ -158,6 +162,8 @@ router.get("/joined", function(req, res) {
         res.render('joined', {lists: result});
     });
 });
+
+//====================================================
 
 // GET route - for the main/home page after sign in/up
 router.get("/home", isLoggedIn, function(req, res) {
