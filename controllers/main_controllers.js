@@ -163,15 +163,25 @@ router.get("/joined", function(req, res) {
     });
 });
 
+// GET route to test mysql query
+router.get("/group", function(req, res) {
+    let user = req.user.username;
+    connection.query("SELECT T1.list_name, confirmed FROM list AS T1 INNER JOIN list_joiners AS T2 ON T1.id = T2.listID WHERE T2.joiner = (?)", [user], function(err, result) {
+        if(err) throw err;
+        console.log(result);
+    });
+});
+
 //====================================================
 
 // GET route - for the main/home page after sign in/up
 router.get("/home", isLoggedIn, function(req, res) {
     let user = req.user.username;
     // TO DO - make the query string variables for each separate query
-    connection.query("SELECT * FROM list WHERE list_owner = (?); SELECT list_name FROM list INNER JOIN list_joiners ON list.id = list_joiners.listID WHERE (list_joiners.joiner = ? AND list_joiners.confirmed = true)", [user, user], function(err, result) {
+    connection.query("SELECT * FROM list WHERE list_owner = (?); SELECT T1.list_name, confirmed FROM list AS T1 INNER JOIN list_joiners AS T2 ON T1.id = T2.listID WHERE T2.joiner = (?) GROUP BY listID", [user, user], function(err, result) {
         if(err) throw err;
-        console.log(result);
+        // console.log(result);
+        console.log(result[1]);
         res.render('home', {
                         user_lists: result[0],
                         joined_lists: result[1]

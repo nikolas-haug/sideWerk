@@ -28,13 +28,22 @@
     {{/each}}
 {{/if}}
 
-{{#if joined_lists}}
+{{!-- {{#if joined_lists.confirmed}} --}}
 
     <hr>
 
-    <h1>Lists You've Joined</h1>
+    {{#each joined_lists}}
+        {{#if this.confirmed}}
+            <p>{{this.list_name}}</p>
+            <button>Proceed to list</button>
+            {{else}}
+            <h5>{{this.list_name}} --> <span>PENDING APPROUVAL!</span></h5>
+        {{/if}}
+    {{/each}}
+
+    {{!-- <h1>Lists You've Joined</h1>
     {{#each joined_lists}}
         <p>{{this.list_name}}</p>
-    {{/each}}
-{{/if}}
+    {{/each}} --}}
+{{!-- {{/if}} --}}
 
