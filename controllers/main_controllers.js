@@ -148,15 +148,39 @@ router.get("/owned", function(req, res) {
     });
 });
 
-// GET route for the user's joined lists
+// GET route for the user lists
 router.get("/joined", function(req, res) {
-    //get the user data
     let user = req.user.username;
-
-    //get the user's joined lists from the db
-
-
-    res.render('joined');
+    console.log(user);
+    connection.query("SELECT list_name FROM list INNER JOIN list_joiners ON list.id = list_joiners.listID WHERE list_joiners.joiner = (?)", [user], function(err, result) {
+        if(err) throw err;
+        console.log(result);
+        res.render('joined', {lists: result});
+    });
 });
+
+// // GET route for the user's joined lists
+// router.get("/joined", function(req, res) {
+//     // get the user data
+//     let user = req.user.username;
+//     // make an empty array to store the list data
+//     let userLists = [];
+
+//     //get the user's joined lists from the db
+//     connection.query("SELECT * FROM list_joiners WHERE joiner = (?)", [user], function(err, result) {
+//         if(err) throw err;
+//         console.log(result);
+
+//         for(let i = 0; i < result.length; i++) {
+//             connection.query("SELECT list_name FROM list WHERE id = (?)", [result[0][i].listID], function(err, result) {
+//                 if(err) throw err;
+//                 userLists.push(result[0][i]);
+//             });
+//         }
+//         console.log(userLists);
+
+//         res.render('joined', {listIDs: result});
+//     });
+// });
 
 module.exports = router;
