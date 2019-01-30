@@ -24,7 +24,7 @@
         {{/each}}
     </ul> --}}
     {{#each user_lists}}
-        <p>{{this.list_name}} </p>
+        <p>{{this.list_name}} <span><button class="owned-list-btn" data-owned_list_id="{{this.id}}">view/edit</button></span></p>
     {{/each}}
 {{/if}}
 
@@ -53,3 +53,29 @@
     {{/each}} --}}
 {{!-- {{/if}} --}}
 
+<script>
+
+    // make the variables
+    const ownedListButtons = document.querySelectorAll('.owned-list-btn');
+
+    ownedListButtons.forEach(listBtn => listBtn.addEventListener('click', getOwnedListData));
+
+    function getOwnedListData(e) {
+
+        console.log(e);
+
+        let ownedListButtonDataId = e.target.dataset.owned_list_id;
+        
+        $.ajax({
+            
+            type: 'GET',
+            url: `/list/owned/${ownedListButtonDataId}`,
+            dataType: "text",
+            success: function(resultData) {
+                window.location.href = `/list/owned/${ownedListButtonDataId}`;
+            }
+        }); 
+
+    }
+
+</script>

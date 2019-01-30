@@ -192,28 +192,9 @@ router.get("/home", isLoggedIn, function(req, res) {
     });
 });
 
-// // GET route for the user's joined lists
-// router.get("/joined", function(req, res) {
-//     // get the user data
-//     let user = req.user.username;
-//     // make an empty array to store the list data
-//     let userLists = [];
-
-//     //get the user's joined lists from the db
-//     connection.query("SELECT * FROM list_joiners WHERE joiner = (?)", [user], function(err, result) {
-//         if(err) throw err;
-//         console.log(result);
-
-//         for(let i = 0; i < result.length; i++) {
-//             connection.query("SELECT list_name FROM list WHERE id = (?)", [result[0][i].listID], function(err, result) {
-//                 if(err) throw err;
-//                 userLists.push(result[0][i]);
-//             });
-//         }
-//         console.log(userLists);
-
-//         res.render('joined', {listIDs: result});
-//     });
-// });
+// GET route - for the single page user owned list
+router.get("/list/owned/:id", function(req, res) {
+    res.render('owned_list');
+});
 
 module.exports = router;
