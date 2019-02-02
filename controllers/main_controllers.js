@@ -210,10 +210,10 @@ router.get("/list/owned/:id", function(req, res) {
                             user: user,
                             list_items: result[0][0],
                             list_details: result[1][0],
-                            list_joiners: result[2][0]
+                            list_joiners: result[2]
             });
         } else {
-            res.redirect('/');
+            res.render('joined_list');
         }
 
         // res.render('active_list', {

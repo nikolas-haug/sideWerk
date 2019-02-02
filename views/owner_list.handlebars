@@ -1,12 +1,22 @@
 <h1>Single Owned List Page</h1>
 
-{{!-- render this if user is the list owner --}}
+<h1>List Name: {{list_details.list_name}}</h1>
 
-    <p>{{list_details.list_owner}}</p>
+<h2>List Owner: {{list_details.list_owner}}</h2>
 
-    {{#if testThings}}
-        <p>do something here!</p>
-    {{/if}}
+{{#if list_joiners}}
+<ul>
+    {{#each list_joiners}}
+        {{#if this.confirmed}}
+            <li>{{this.joiner}}</li>
+            {{else}}
+            <li>{{this.joiner}}</li>
+            <button>Confirm Joiner</button>
+        {{/if}}
+    {{/each}}
+</ul>
+    {{else}}
+    <h4>no joiners currently</h4>
+{{/if}}
 
-
-{{!-- render this if user is the list's joiner --}}
+{{!-- <p>{{list_joiners.joiner}}</p> --}}
