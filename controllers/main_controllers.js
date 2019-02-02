@@ -192,9 +192,53 @@ router.get("/home", isLoggedIn, function(req, res) {
     });
 });
 
-// GET route - for the single page user owned list
+// GET route - for the single page list - for owners and joiners (different views)
 router.get("/list/owned/:id", function(req, res) {
-    res.render('owned_list');
+    // create the list id variable
+    let listID = req.params.id;
+    // create the user variable
+    let user = req.user.username;
+
+    // query the db to get: user info, list info, joiner info
+    connection.query("SELECT * FROM list_items WHERE listID = (?); SELECT * FROM list WHERE id = (?); SELECT * FROM list_joiners WHERE listID = (?)", [listID, listID, listID], function(err, result) {
+        if(err) throw err;
+        console.log(result);
+
+        // set up a conditional rendering depending on user
+        if(user === result[1][0].list_owner) {
+            res.render('owner_list', {
+                            user: user,
+                            list_items: result[0][0],
+                            list_details: result[1][0],
+                            list_joiners: result[2][0]
+            });
+        } else {
+            res.redirect('/');
+        }
+
+        // res.render('active_list', {
+        //                 user: user,
+        //                 list_items: result[0][0],
+        //                 list_details: result[1][0],
+        //                 list_joiners: result[2][0]
+        //             });
+
+    });
 });
+
+// create the list id variable
+// let listID = req.params.id;
+
+// connection.query("SELECT * FROM list_items WHERE listID = (?); SELECT list_name FROM list WHERE id = (?); SELECT list_owner FROM list WHERE id = (?); SELECT * FROM list_joiners WHERE listID = (?)", [listID, listID, listID, listID], function(err, result) {
+//     if(err) throw err;
+//     // console.log(result[1][0].list_name);
+//     res.render('list', {list: result[0], 
+//                         name: result[1][0].list_name,
+//                         list_owner: result[2][0].list_owner, 
+//                         listID: listID, 
+//                         user: req.user.username,
+//                         joiners: result[3]
+//                     });
+// });
 
 module.exports = router;

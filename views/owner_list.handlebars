@@ -1,0 +1,12 @@
+<h1>Single Owned List Page</h1>
+
+{{!-- render this if user is the list owner --}}
+
+    <p>{{list_details.list_owner}}</p>
+
+    {{#if testThings}}
+        <p>do something here!</p>
+    {{/if}}
+
+
+{{!-- render this if user is the list's joiner --}}
