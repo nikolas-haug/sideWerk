@@ -193,7 +193,7 @@ router.get("/home", isLoggedIn, function(req, res) {
 });
 
 // GET route - for the single page list - for owners and joiners (different views)
-router.get("/list/owned/:id", function(req, res) {
+router.get("/list/active/:id", function(req, res) {
     // create the list id variable
     let listID = req.params.id;
     // create the user variable
@@ -214,7 +214,12 @@ router.get("/list/owned/:id", function(req, res) {
                             list_joiners: result[2]
             });
         } else {
-            res.render('joined_list');
+            res.render('joined_list', {
+                            user: user,
+                            list_items: result[0],
+                            list_name: result[1][0].list_name,
+                            list_joiners: result[2]
+            });
         }
 
         // res.render('active_list', {

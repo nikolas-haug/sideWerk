@@ -69,10 +69,10 @@
         $.ajax({
             
             type: 'GET',
-            url: `/list/owned/${ownedListButtonDataId}`,
+            url: `/list/active/${ownedListButtonDataId}`,
             dataType: "text",
             success: function(resultData) {
-                window.location.href = `/list/owned/${ownedListButtonDataId}`;
+                window.location.href = `/list/active/${ownedListButtonDataId}`;
             }
         }); 
 

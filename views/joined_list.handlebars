@@ -1,1 +1,61 @@
 <h1>Single page for list joiners</h1>
+
+<h1>List Name: {{list_name}}</h1>
+
+<hr>
+
+<h1>List joiners:</h1>
+
+<ul>
+    {{#each list_joiners}}
+        <li>{{this.joiner}}</li>
+    {{/each}}
+</ul>
+
+<hr>
+
+<h1>List items:</h1>
+
+{{!-- render differently if item is marked as 'completed' or not --}}
+<ul>
+    {{#each list_items}}
+            {{#if this.completed}}
+                <li style="text-decoration: line-through">{{this.task_name}}</li>
+                {{else}}
+                <li>{{this.task_name}} <span><a href="#" class="check-item-btn" data-item_id="{{this.id}}">✓</a></span></li>
+                {{!-- <button class="check-item-btn" data-item_id="{{this.id}}">✓</button> --}}
+            {{/if}}
+    {{/each}}
+</ul>
+
+
+<script>
+
+
+    // get the item id
+    const checkItemButtons = document.querySelectorAll('.check-item-btn');
+
+    checkItemButtons.forEach(itemBtn => itemBtn.addEventListener('click', checkItem));
+
+    function checkItem(e) {
+        // get the item id
+        let itemID = e.target.dataset.item_id;
+
+        // TO DO - update page with redirect or re-render
+        $.ajax({
+
+            type: 'DELETE',
+            url: `/item/remove/${itemID}`,
+            success: function(resultData) {
+                window.location.href = `/home`;
+            }
+        });
+
+        // TO DO - delete this after solving problem
+        document.location.reload();
+
+        // window.location.href = "/home";
+    }
+
+
+</script>
