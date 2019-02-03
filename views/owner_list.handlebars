@@ -11,7 +11,7 @@
             <li>{{this.joiner}}</li>
             {{else}}
             <li>{{this.joiner}}</li>
-            <button>Confirm Joiner</button>
+            <button class="confirm-joiner-btn" data-joiner_id="{{this.id}}">Confirm Joiner</button>
         {{/if}}
     {{/each}}
 </ul>
@@ -20,3 +20,33 @@
 {{/if}}
 
 {{!-- <p>{{list_joiners.joiner}}</p> --}}
+
+<script>
+
+    // make the variables
+    const confirmJoinerButtons = document.querySelectorAll('.confirm-joiner-btn');
+
+    confirmJoinerButtons.forEach(joinBtn => joinBtn.addEventListener('click', confirmJoiner));
+
+    function confirmJoiner(e) {
+        // get the user id
+        let joinerID = e.target.dataset.joiner_id;
+
+        // TO DO - update page with redirect or re-render
+        $.ajax({
+
+            type: 'PUT',
+            url: `/joiner/confirm/${joinerID}`,
+            success: function(resultData) {
+                window.location.href = `/home`;
+            }
+        });
+
+        // TO DO - delete this after solving problem
+        document.location.reload();
+
+        // window.location.href = "/home";
+    }
+
+
+</script>

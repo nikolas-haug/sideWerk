@@ -226,6 +226,16 @@ router.get("/list/owned/:id", function(req, res) {
     });
 });
 
+router.put("/joiner/confirm/:id", function(req, res) {
+    let joinerID = req.params.id;
+
+    connection.query("UPDATE list_joiners SET confirmed = 1 WHERE id = (?)", [joinerID], function(err, result) {
+        if(err) throw err;
+        console.log(result);
+        // res.redirect('/');
+    });
+});
+
 // create the list id variable
 // let listID = req.params.id;
 
