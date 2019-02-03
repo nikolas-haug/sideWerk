@@ -1,8 +1,12 @@
 <h1>Single Owned List Page</h1>
 
-<h1>List Name: {{list_details.list_name}}</h1>
+<h1>List Name: {{list_name}}</h1>
 
-<h2>List Owner: {{list_details.list_owner}}</h2>
+{{!-- <h2>List Owner: {{list_details.list_owner}}</h2> --}}
+
+<hr>
+
+<h1>List joiners:</h1>
 
 {{#if list_joiners}}
 <ul>
@@ -19,14 +23,31 @@
     <h4>no joiners currently</h4>
 {{/if}}
 
+<hr>
+
+<h1>List items:</h1>
+
+<ul>
+    {{#each list_items}}
+        {{#if this.completed}}
+            <li>{{this.task_name}}</li>
+            <button class="validate-item-btn" data-item_id="{{this.id}}">VALIDATE</button>
+            {{else}}
+            <li>{{this.task_name}}</li>
+        {{/if}}
+    {{/each}}
+</ul>
+
 {{!-- <p>{{list_joiners.joiner}}</p> --}}
 
 <script>
 
     // make the variables
     const confirmJoinerButtons = document.querySelectorAll('.confirm-joiner-btn');
+    const validateItemButtons = document.querySelectorAll('.validate-item-btn');
 
     confirmJoinerButtons.forEach(joinBtn => joinBtn.addEventListener('click', confirmJoiner));
+    validateItemButtons.forEach(valBtn => valBtn.addEventListener('click', validateItem));
 
     function confirmJoiner(e) {
         // get the user id
@@ -37,6 +58,26 @@
 
             type: 'PUT',
             url: `/joiner/confirm/${joinerID}`,
+            success: function(resultData) {
+                window.location.href = `/home`;
+            }
+        });
+
+        // TO DO - delete this after solving problem
+        document.location.reload();
+
+        // window.location.href = "/home";
+    }
+
+    function validateItem(e) {
+        // get the item id
+        let itemID = e.target.dataset.item_id;
+
+        // TO DO - update page with redirect or re-render
+        $.ajax({
+
+            type: 'DELETE',
+            url: `/item/remove/${itemID}`,
             success: function(resultData) {
                 window.location.href = `/home`;
             }

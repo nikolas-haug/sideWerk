@@ -208,8 +208,9 @@ router.get("/list/owned/:id", function(req, res) {
         if(user === result[1][0].list_owner) {
             res.render('owner_list', {
                             user: user,
-                            list_items: result[0][0],
-                            list_details: result[1][0],
+                            list_items: result[0],
+                            list_details: result[1],
+                            list_name: result[1][0].list_name,
                             list_joiners: result[2]
             });
         } else {
@@ -226,6 +227,7 @@ router.get("/list/owned/:id", function(req, res) {
     });
 });
 
+// PUT route - to confirm a joiner to a single list
 router.put("/joiner/confirm/:id", function(req, res) {
     let joinerID = req.params.id;
 
@@ -235,6 +237,25 @@ router.put("/joiner/confirm/:id", function(req, res) {
         // res.redirect('/');
     });
 });
+
+// DELETE route - to remove an item from the db after val or user deletion
+router.delete("/item/remove/:id", function(req, res) {
+    let itemID = req.params.id;
+
+    connection.query("DELETE FROM list_items WHERE id = (?)", [itemID], function(err, result) {
+        if(err) throw err;
+        console.log(result);
+    });
+});
+
+// con.connect(function(err) {
+//     if (err) throw err;
+//     var sql = "DELETE FROM customers WHERE address = 'Mountain 21'";
+//     con.query(sql, function (err, result) {
+//       if (err) throw err;
+//       console.log("Number of records deleted: " + result.affectedRows);
+//     });
+//   });
 
 // create the list id variable
 // let listID = req.params.id;
