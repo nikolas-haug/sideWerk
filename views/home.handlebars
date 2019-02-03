@@ -41,7 +41,7 @@
     {{#each joined_lists}}
         {{#if this.confirmed}}
             <p>{{this.list_name}}</p>
-            <button>Proceed to list</button>
+            <button class="joined-list-btn" data-owned_list_id="{{this.listID}}">Proceed to list</button>
             {{else}}
             <h5>{{this.list_name}} --> <span>PENDING APPROVAL!</span></h5>
         {{/if}}
@@ -55,24 +55,27 @@
 
 <script>
 
+    // GET REQUEST for the owned list 
     // make the variables
     const ownedListButtons = document.querySelectorAll('.owned-list-btn');
+    const joinedListButtons= document.querySelectorAll('.joined-list-btn');
 
     ownedListButtons.forEach(listBtn => listBtn.addEventListener('click', getownedListData));
+    joinedListButtons.forEach(listBtn => listBtn.addEventListener('click', getownedListData));
 
     function getownedListData(e) {
 
         console.log(e);
 
-        let ownedListButtonDataId = e.target.dataset.owned_list_id;
+        let listButtonDataId = e.target.dataset.owned_list_id;
         
         $.ajax({
             
             type: 'GET',
-            url: `/list/active/${ownedListButtonDataId}`,
+            url: `/list/active/${listButtonDataId}`,
             dataType: "text",
             success: function(resultData) {
-                window.location.href = `/list/active/${ownedListButtonDataId}`;
+                window.location.href = `/list/active/${listButtonDataId}`;
             }
         }); 
 

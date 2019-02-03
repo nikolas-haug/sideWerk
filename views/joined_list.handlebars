@@ -44,8 +44,8 @@
         // TO DO - update page with redirect or re-render
         $.ajax({
 
-            type: 'DELETE',
-            url: `/item/remove/${itemID}`,
+            type: 'PUT',
+            url: `/item/check/${itemID}`,
             success: function(resultData) {
                 window.location.href = `/home`;
             }

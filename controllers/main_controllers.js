@@ -181,10 +181,10 @@ router.get("/group", function(req, res) {
 router.get("/home", isLoggedIn, function(req, res) {
     let user = req.user.username;
     // TO DO - make the query string variables for each separate query
-    connection.query("SELECT * FROM list WHERE list_owner = (?); SELECT T1.list_name, confirmed FROM list AS T1 INNER JOIN list_joiners AS T2 ON T1.id = T2.listID WHERE T2.joiner = (?) GROUP BY listID", [user, user], function(err, result) {
+    connection.query("SELECT * FROM list WHERE list_owner = (?); SELECT T1.list_name, confirmed, listID FROM list AS T1 INNER JOIN list_joiners AS T2 ON T1.id = T2.listID WHERE T2.joiner = (?) GROUP BY listID", [user, user], function(err, result) {
         if(err) throw err;
         // console.log(result);
-        // console.log(result[1]);
+        console.log(result[1]);
         res.render('home', {
                         user_lists: result[0],
                         joined_lists: result[1]
@@ -237,6 +237,17 @@ router.put("/joiner/confirm/:id", function(req, res) {
     let joinerID = req.params.id;
 
     connection.query("UPDATE list_joiners SET confirmed = 1 WHERE id = (?)", [joinerID], function(err, result) {
+        if(err) throw err;
+        console.log(result);
+        // res.redirect('/');
+    });
+});
+
+// PUT route - to check an item on alist
+router.put("/item/check/:id", function(req, res) {
+    let itemID = req.params.id;
+
+    connection.query("UPDATE list_items SET completed = 1 WHERE id = (?)", [itemID], function(err, result) {
         if(err) throw err;
         console.log(result);
         // res.redirect('/');
