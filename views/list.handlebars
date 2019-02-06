@@ -42,26 +42,36 @@
 
 <script>
 
-    document.querySelector('#join-btn').addEventListener('click', function(e) {
+    // TO DO - use these handlebars variables for conditional rendering
+    const user = "{{user}}";
+    const listOwner = "{{list_owner}}";
+    alert(user);
 
+    document.querySelector('#join-btn').addEventListener('click', joinList);
+
+    function joinList(e) {
+
+        if(user !== listOwner) {
         // TO DO - make this a modal etc to alert the user after join
-        alert("list joined!");
+            alert("list joined!");
 
-        console.log(e);
+            console.log(e);
 
-        let listId = e.target.dataset.list_id;
-        console.log(listId);
+            let listId = e.target.dataset.list_id;
+            console.log(listId);
 
-         $.ajax({
-            
-            type: 'POST',
-            url: `/list/join/${listId}`,
-            success: function(resultData) { 
-                console.log(resultData);
-                window.location.href = "/board";
-            }
-        }); 
-
-    });
+            $.ajax({
+                
+                type: 'POST',
+                url: `/list/join/${listId}`,
+                success: function(resultData) { 
+                    console.log(resultData);
+                    window.location.href = "/board";
+                }
+            }); 
+        } else {
+            alert("you are the list owner!");
+        }
+    }
 
 </script>
