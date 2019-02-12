@@ -46,9 +46,15 @@ body {
 
 	/*NAv Gloabl styles*/
 	.bg-light {
-		background-color: #63c6c6!important;
+		background-color: transparent!important;
+	
 		/*padding: 1rem;
-		margin: 1rem;*/
+		margin: 1rem;*/	
+	}
+
+	.navbar-light .navbar-toggler{
+		background-color: #63c6c6;
+		border-color: transparent;
 	}
 	/*Nav Global styles ENd*/
 
@@ -77,6 +83,13 @@ body {
 		margin-bottom: 2rem;
 
 	}
+
+	/*Media Queries*/
+	@media(min-width:1200px) {
+   .navbar-collapse {
+    width: auto;
+    /* more code here */
+}
 
 
 
