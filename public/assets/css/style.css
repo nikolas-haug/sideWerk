@@ -56,6 +56,9 @@ body {
 		background-color: #63c6c6;
 		border-color: transparent;
 	}
+	.navbar-light .navbar-nav .nav-link{
+		color: black;
+	}
 	/*Nav Global styles ENd*/
 
 	/*Global Button Styles*/
