@@ -1,18 +1,123 @@
-<h1>Home Page</h1>
+<!-- Nav -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Navbar</a>
 
-<a href="/profile">Profile</a>
-<a href="/create">Create a new list</a>
-<a href="/board">View list board</a>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="/home">Home</a></li>
+        <li class="nav-item active">
+        <a class="nav-link" href="/create">Create new list</a></li>
+        <li class="nav-item active">
+        <a class="nav-link" href="/profile">Profile</a></li>
+        <li class="nav-item active">
+        <a class="nav-link" href="/board">View list board</a></li>
+        <li class="nav-item active">
+
+            {{!-- view the lists you've created or joined --}}
+
+            <li class="nav-item active">
+<a class="nav-link" href="/owned">View your created lists</a></li>
+<li class="nav-item active">
+<a class="nav-link" href="/joined">Your joined lists</a></li>
+        <a class="nav-link" href="/logout">Logout</a></li>
+
+<hr>
+
+
+        <a class="nav-link disabled" href="#">Disabled</a></li>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<!-- end Nav -->
+
+
+<!-- page wrapper -->
+<div class="container">
+    <div class="row justify-content-md-center">
+
+<!-- header -->
+<div class="card" style="width: 50rem;">
+     <img src="../public/assets/images/logo-2.png" class="card-img-top" alt="Side Werk logo">
+     <div class="card-body align-self-center">
+        <h1 class="card-titler">Home Page</h1>
+        <h3 class="card-text align-self-center">let's get to werk!</p>
+
+
+            <div class="container">
+            <div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active">
+    Cras justo odio
+  </a>
+  <p><a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a></p>
+  <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+  <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+  <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
+</div></div>
+
+
+
+<h1>{{message}}</h1>
+
+
+<!-- header ends -->
+
+<hr>
+
+<a href="/create">create new list</a>
+<a href="/board">view list board</a>
+
+<br>
+
+{{!-- check if a user is logged in - conditionally render login/signup --}}
+{{#unless user}}
+
+
+    <a href="/login" class="btn btn-primary">Login</a>
+    <a href="/signup" class="btn btn-primary">Sign up</a>
+{{/unless}}
+
+<hr>
+
+
+
 
 <a href="/logout">Logout</a>
+</div>
+</div>
+</div>
+<!-- End of row -->
+</div>
+<!-- page wrapper ends -->
+</div>
 
-<hr>
 
-{{!-- view the lists you've created or joined --}}
-<a href="/owned">View your created lists</a>
-<a href="/joined">Your joined lists</a>
 
-<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- TRANFER -->
+
+
 
 {{!-- display the user's owned and joined lists if they exist --}}
 

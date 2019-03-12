@@ -1,6 +1,44 @@
-<h1>index page</h1>
+<!-- Nav -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Navbar</a>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<!-- end Nav -->
+
+
+<!-- page wrapper -->
+<div class="container">
+	<div class="row justify-content-md-center">
+
+<!-- header -->
+<div class="card" style="width: 50rem;">
+	 <img src="../public/assets/images/logo-2.png" class="card-img-top" alt="Side Werk logo">
+	 <div class="card-body align-self-center">
+	 	<h1 class="card-titler">Welcome</h1>
+	 	<h3 class="card-text align-self-center">let's get to werk!</p>
+
+
 
 <h1>{{message}}</h1>
+
+
+<!-- header ends -->
 
 <hr>
 
@@ -11,10 +49,22 @@
 
 {{!-- check if a user is logged in - conditionally render login/signup --}}
 {{#unless user}}
-    <a href="/login">Login</a>
-    <a href="/signup">Sign up</a>
+
+
+    <a href="/login" class="btn btn-primary">Login</a>
+    <a href="/signup" class="btn btn-primary">Sign up</a>
 {{/unless}}
 
 <hr>
 
+
+
+
 <a href="/logout">Logout</a>
+</div>
+</div>
+</div>
+<!-- End of row -->
+</div>
+<!-- page wrapper ends -->
+</div>
