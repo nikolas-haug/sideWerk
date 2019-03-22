@@ -52,7 +52,7 @@ module.exports = function(app, passport) {
 			// render the page and pass in any flash data if it exists
 			res.render('signup', { message: req.flash('signupMessage') });
 		} else {
-			// if user is logged in redirect to home page
+			// if user is logged (already signed up) in redirect to home page - TO DO: display a message that explains this
 			res.render('home');
 		}
 	});
