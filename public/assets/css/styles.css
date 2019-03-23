@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css?family=Limelight|Open+Sans');
+/*Custom Style Sheet*/
+
+/*Universial Styles*/
+body{
+	background-color: #EFEDEA;
+}
+
+/*Typograpghy*/
+h1	{
+	font-family: 'Limelight', 'sans-serif';
+
+}
+h2{
+	font-family: 'Limelight', 'sans-serif';
+
+}
+
+h3{
+	font-family: 'Limelight', 'sans-serif';
+}
+h4{
+	font-family: 'Open Sans', sans-serif;
+}
+h5{
+	font-family: 'Open Sans', sans-serif;
+}
+p{
+	font-family: 'Open Sans', sans-serif;
+}
+
+/*End typgrapghy*/
+
+a{
+	color: #68C6C5;
+
+}
+a:hover{
+	color: #231F20;
+}
+a:focus{
+	color: #231F20;
+}
+
+/*End of Universial Styles*/
+
+
+/*NavBar Styles*/
+.logo{
+	max-height: 60px;
+}
+.bg-light {
+    background-color: transparent!important;
+}
+
+.navbar-light .navbar-toggler {
+    color: #68C6C5;
+    border-color: transparent;
+}
+.navbar-toggler:active{
+
+}
+button:focus{
+	outline: 5px auto #68C6C5;
+}
+
