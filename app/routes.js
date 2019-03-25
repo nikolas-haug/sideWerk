@@ -53,7 +53,9 @@ module.exports = function(app, passport) {
 			res.render('signup', { message: req.flash('signupMessage') });
 		} else {
 			// if user is logged (already signed up) in redirect to home page - TO DO: display a message that explains this
-			res.render('home');
+			// create the object to house the message
+			const message = { validation: 'you are already signed up!'};
+			res.render('home', { validation: message});
 		}
 	});
 
