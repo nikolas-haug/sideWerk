@@ -34,7 +34,7 @@ CREATE TABLE users(
     username VARCHAR(20) NOT NULL,
     password CHAR(60) NOT NULL,
         
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
 
     UNIQUE INDEX id_UNIQUE (id ASC),
     UNIQUE INDEX username_UNIQUE (username ASC)

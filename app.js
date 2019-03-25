@@ -26,6 +26,7 @@ app.use(cookieParser()); // read cookies (needed for auth)
 
 //sets up the express app to serve static files
 app.use(express.static("public"));
+// app.use("/public", express.static("public"));
 
 // TO DO - ADD PACKAGE IF NEEDED
 // Override with POST having ?_method=DELETE
