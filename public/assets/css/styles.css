@@ -4,6 +4,8 @@
 /*Universial Styles*/
 body{
 	background-color: #EFEDEA;
+	color: #231F20;
+
 }
 
 /*Typograpghy*/
@@ -62,5 +64,22 @@ a:focus{
 }
 button:focus{
 	outline: 5px auto #68C6C5;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #231F20;
+    border-color: #007bff;
+}
+.btn-primary:hover{
+	background-color: ;
+}
+
+
+/*Index Page*/
+.header-img{
+	max-height: 10rem;
+	padding: .5rem;
+	margin: .5rem;
+
 }
 

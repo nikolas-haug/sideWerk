@@ -1,4 +1,12 @@
-<h1>index page</h1>
+<div class="container d-flex justify-content-center">
+	<div class="row">
+		<div class="col">
+
+			
+		<div>
+			<img class="header-img" src="/assets/images/logo.svg">
+<h1 class="align-self-center">Welcome</h1>
+</div>
 
 <h1>{{message}}</h1>
 
@@ -11,10 +19,19 @@
 
 {{!-- check if a user is logged in - conditionally render login/signup --}}
 {{#unless user}}
-    <a href="/login">Login</a>
-    <a href="/signup">Sign up</a>
+    
+    <button type="button" class="btn btn-primary"><a href="/login">Login</a></button>
+    <button type="button" class="btn btn-secondary"> <a href="/signup">Sign up</a></button>
+    
+    <!-- <a href="/login">Login</a>
+    <a href="/signup">Sign up</a> -->
+
 {{/unless}}
 
 <hr>
 
 <a href="/logout">Logout</a>
+
+</div>
+	</div>
+</div>
