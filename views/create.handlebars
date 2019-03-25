@@ -12,19 +12,43 @@
 <hr>
 
 {{!-- <form onsubmit="addNewList(newList)" method="POST"> --}}
-    <h4>list name:</h4>
+    {{!-- <h4>list name:</h4> --}}
     <input type="text" id="list_name">
-    {{#each items}}
-        <h2 class="item-btn" data-item_name="{{this.item_name}}">{{ this.item_name }}</h2>
+    {{!-- {{#each items}} --}}
+        {{!-- <h2 class="item-btn" data-item_name="{{this.item_name}}">{{ this.item_name }}</h2> --}}
         {{!-- <button class="item-btn" data-item_name="{{this.item_name}}">{{this.item_name}}</button> --}}
-    {{/each}}
+    {{!-- {{/each}} --}}
     <button id="create-list-btn" onclick="addNewList()">submit</button>
 {{!-- </form> --}}
+
+    {{#each items}}
+        <input type="checkbox" name="checkbox" id="checkbox_id" value="{{this.item_name}}">
+        <label for="checkbox_id">{{this.item_name}}</label>
+    {{/each}}
 
     <hr>
 
 
 <script>
+
+    const checkbox = document.querySelectorAll("input[name=checkbox]");
+
+    checkbox.forEach(box => box.addEventListener('change', getItemData));
+
+    // function for the item checkboxes
+    function getItemData() {
+        if(this.checked) {
+            // Checkbox is checked..
+            console.log(this.value);
+            newItems.push(this.value);
+            console.log(newItems);
+        } else {
+            // Checkbox is not checked..
+            console.log("unchecked box");
+            newItems.pop(this.value);
+            console.log(newItems);
+        }
+    }
 
     let newList = {};
     let newItems = [];
