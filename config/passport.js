@@ -68,6 +68,8 @@ module.exports = function(passport) {
                     connection.query(insertQuery,[newUserMysql.username, newUserMysql.password],function(err, rows) {
                         newUserMysql.id = rows.insertId;
 
+                        // TO DO: log the new user in so we can display validation messages
+
                         return done(null, newUserMysql);
                     });
                 }
@@ -101,8 +103,9 @@ module.exports = function(passport) {
                 if (!bcrypt.compareSync(password, rows[0].password))
                     return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
 
-                // all is well, return successful user
-                return done(null, rows[0]);
+                // all is well, return successful user - display message to user about their status
+                return done(null, rows[0], req.flash('homepageMessage', 'You are already logged in as: ' + username));
+                
             });
         })
     );

@@ -10,10 +10,15 @@
 
 <h1>{{message}}</h1>
 
+<h2>{{val.message}}</h2>
+
 <hr>
 
-<a href="/create">create new list</a>
-<a href="/board">view list board</a>
+{{!-- check if a user is logged in - conditionally render the create/view buttons --}}
+{{#if user}}
+    <a href="/create">create new list</a>
+    <a href="/board">view list board</a>
+{{/if}}
 
 <br>
 
@@ -30,8 +35,13 @@
 
 <hr>
 
-<a href="/logout">Logout</a>
+{{!-- show the logout button only if user is logged in --}}
+{{#if user}}
+    <a href="/logout">Logout</a>
+{{/if}}
 
 </div>
 	</div>
 </div>
+
+

@@ -13,8 +13,11 @@ function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated())
 		return next();
 
-	// if they aren't redirect them to the home page
-	res.redirect('/');
+    // if they aren't redirect them to the index page - with message
+    // req.flash('validation', 'please log in');
+    const validation = { message: 'please log in or sign up' };
+    // res.render('index', {val: req.flash('validation')});
+    res.render('index', {val: validation});
 }
 
 //set up the routes using the express router

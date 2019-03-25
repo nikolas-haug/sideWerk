@@ -19,7 +19,8 @@ module.exports = function(app, passport) {
 			// render the page and pass in any flash data if it exists
 			res.render('login', { message: req.flash('loginMessage') });
 		} else {
-			res.render('home');
+			// if user is logged in redirect to home page - display message
+			res.render('home', {message: req.flash('homepageMessage')});
 		}
 		
 	});
@@ -51,7 +52,10 @@ module.exports = function(app, passport) {
 			// render the page and pass in any flash data if it exists
 			res.render('signup', { message: req.flash('signupMessage') });
 		} else {
-			res.render('home');
+			// if user is logged (already signed up) in redirect to home page - TO DO: display a message that explains this
+			// create the object to house the message
+			const message = { validation: 'you are already signed up!'};
+			res.render('home', { validation: message});
 		}
 	});
 
