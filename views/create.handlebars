@@ -2,99 +2,131 @@
     <div class="row">
         <div class="col">
             <img class="header-img" src="/assets/images/logo.svg">
-<h1>Create New Board Page</h1>
+            <h1>Create New Board Page</h1>
 
-<hr>
+            <style>
+                input[type=checkbox] {
+                    color: #ccc;
+                    font-style: italic;
+                    display: none;
+                }
 
-<a href="/home">Home</a>
-<a href="/board">view list board</a>
+                input[type=checkbox]:checked+label {
+                    color: #f00;
+                    font-style: normal;
+                }
+            </style>
 
-<hr>
+            <hr>
 
-{{!-- <form onsubmit="addNewList(newList)" method="POST"> --}}
-    {{!-- <h4>list name:</h4> --}}
-    <input type="text" id="list_name">
-    {{!-- {{#each items}} --}}
-        {{!-- <h2 class="item-btn" data-item_name="{{this.item_name}}">{{ this.item_name }}</h2> --}}
-        {{!-- <button class="item-btn" data-item_name="{{this.item_name}}">{{this.item_name}}</button> --}}
-    {{!-- {{/each}} --}}
-    <button id="create-list-btn" onclick="addNewList()">submit</button>
-{{!-- </form> --}}
+            <a href="/home">Home</a>
+            <a href="/board">view list board</a>
 
-    {{#each items}}
-        <input type="checkbox" name="checkbox" id="checkbox_id" value="{{this.item_name}}">
-        <label for="checkbox_id">{{this.item_name}}</label>
-    {{/each}}
+            <hr>
 
-    <hr>
+            {{!-- <form onsubmit="addNewList(newList)" method="POST"> --}}
+            {{!-- <h4>list name:</h4> --}}
+            <input type="text" id="list_name">
+            {{!-- {{#each items}} --}}
+            {{!-- <h2 class="item-btn" data-item_name="{{this.item_name}}">{{ this.item_name }}</h2> --}}
+            {{!-- <button class="item-btn" data-item_name="{{this.item_name}}">{{this.item_name}}</button> --}}
+            {{!-- {{/each}} --}}
+            <button id="create-list-btn" onclick="addNewList()">submit</button>
+            {{!-- </form> --}}
 
 
-<script>
 
-    const checkbox = document.querySelectorAll("input[name=checkbox]");
+            <ul class="list-group mt-5">
+                {{#each items}}
+                {{!-- <li class="list-group-item"> --}}
+                <input type="checkbox" name="checkbox" id="{{this.id}}" value="{{this.item_name}}">
+                <label for="{{this.id}}">{{this.item_name}}</label>
+                {{!-- </li> --}}
+                {{/each}}
+            </ul>
+            {{!-- <ul class="list-group"> --}}
+            {{!-- <li class="list-group-item"> --}}
 
-    checkbox.forEach(box => box.addEventListener('change', getItemData));
+            {{!-- </li> --}}
+            {{!-- </ul> --}}
 
-    // function for the item checkboxes
-    function getItemData() {
-        if(this.checked) {
-            // Checkbox is checked..
-            console.log(this.value);
-            newItems.push(this.value);
-            console.log(newItems);
-        } else {
-            // Checkbox is not checked..
-            console.log("unchecked box");
-            newItems.pop(this.value);
-            console.log(newItems);
-        }
-    }
 
-    let newList = {};
-    let newItems = [];
 
-    // get the list name input
-    const listName = document.querySelector('#list_name');
-    // select the buttons for click events
-    const itemButtons = document.querySelectorAll('.item-btn');
-    // add click listeners to each button
-    itemButtons.forEach(itemBtn => itemBtn.addEventListener('click', getData));
+            <hr>
 
-    function getData(e) {
-        // remove clicked item from DOM
-        this.style.display = 'none';
-        // get the new item data
-        let newItem = e.target.dataset.item_name;
-        // add it to the new items array
-        newItems.push(newItem);
-    }
 
-    // function to handle the form submit after the new list has been created
-    // send new data to post route in the database to create new list
-    function addNewList() {
+            <script>
 
-        newList = {
-            items: newItems,
-            listName: listName.value
-        }
-        
-        $.ajax({
+                // make the variables for the checkboxes and input field rows
+                // const listRow = document.querySelectorAll('.list-group-item');
+                const checkbox = document.querySelectorAll("input[type=checkbox]");
+
+                let newList = {};
+                let newItems = [];
+
+                checkbox.forEach(box => box.addEventListener('change', getItemData));
+                // listRow.forEach(listItem => listItem.addEventListener('change', selectItem));
+
+                // function to add the active class to selected list items
+                function selectItem() {
+                    this.classList.add('active');
+                }
+
+                // function for the item checkboxes
+                function getItemData() {
+                    if (this.checked) {
+                        newItems.push(this.value);
+                        console.log(newItems);
+                    } else {
+                        newItems = newItems.filter(item => item !== this.value);
+                        console.log(newItems);
+                    }
+                }
+
             
-            type: 'POST',
-            url: "/list/create",
-            data: newList,
-            dataType: "text",
-            success: function(resultData) { 
-                console.log(resultData);
-                window.location.href = "/board";
-            }
-        }); 
-    
-    }
 
-    
+                // get the list name input
+                const listName = document.querySelector('#list_name');
+                // select the buttons for click events
+                const itemButtons = document.querySelectorAll('.item-btn');
+                // add click listeners to each button
+                itemButtons.forEach(itemBtn => itemBtn.addEventListener('click', getData));
 
-</script>
-</div>
-</div>
+                function getData(e) {
+                    // remove clicked item from DOM
+                    this.style.display = 'none';
+                    // get the new item data
+                    let newItem = e.target.dataset.item_name;
+                    // add it to the new items array
+                    newItems.push(newItem);
+                }
+
+                // function to handle the form submit after the new list has been created
+                // send new data to post route in the database to create new list
+                function addNewList() {
+
+                    newList = {
+                        items: newItems,
+                        listName: listName.value
+                    }
+
+                    $.ajax({
+
+                        type: 'POST',
+                        url: "/list/create",
+                        data: newList,
+                        dataType: "text",
+                        success: function (resultData) {
+                            console.log(resultData);
+                            window.location.href = "/board";
+                        }
+                    });
+
+                }
+
+
+
+            </script>
+        </div>
+    </div>
 </div>
