@@ -4,20 +4,6 @@
             <img class="header-img" src="/assets/images/logo.svg">
             <h1>Create New Board Page</h1>
 
-            {{!-- TO DO - add this to the main.css file --}}
-            <style>
-                input[type=checkbox] {
-                    color: #ccc;
-                    font-style: italic;
-                    display: none;
-                }
-
-                input[type=checkbox]:checked+label {
-                    color: #f00;
-                    font-style: normal;
-                }
-            </style>
-
             {{!-- TO DO - remove the excessive hrs --}}
             <hr>
 
@@ -26,55 +12,32 @@
 
             <hr>
 
-            {{!-- <form onsubmit="addNewList(newList)" method="POST"> --}}
-            {{!-- <h4>list name:</h4> --}}
-            <input type="text" id="list_name">
-            {{!-- {{#each items}} --}}
-            {{!-- <h2 class="item-btn" data-item_name="{{this.item_name}}">{{ this.item_name }}</h2> --}}
-            {{!-- <button class="item-btn" data-item_name="{{this.item_name}}">{{this.item_name}}</button> --}}
-            {{!-- {{/each}} --}}
-            <button id="create-list-btn" onclick="addNewList()">submit</button>
-            {{!-- </form> --}}
+            <input class="form-control" id="list_name" type="text" placeholder="Enter list name">
 
-
-
-            <ul class="list-group mt-5">
+            <ul class="list-group mt-3">
                 {{#each items}}
                 <li class="list-group-item" data-item_name="{{this.item_name}}">
                     {{ this.item_name }}
-                    {{!-- <input type="checkbox" name="checkbox" id="{{this.id}}" value="{{this.item_name}}">
-                    <label for="{{this.id}}">{{this.item_name}}</label> --}}
                 </li>
                 {{/each}}
             </ul>
-            {{!-- <ul class="list-group"> --}}
-            {{!-- <li class="list-group-item"> --}}
 
-            {{!-- </li> --}}
-            {{!-- </ul> --}}
-
-
+            <button id="create-list-btn" class="btn btn-primary mt-2 w-100" onclick="addNewList()">submit</button>
 
             <hr>
-
-
+            
+            {{!-- start scripts --}}
             <script>
 
                 // make the variables for the checkboxes and input field rows
                 const listRow = document.querySelectorAll('.list-group-item');
-                // const checkbox = document.querySelectorAll("input[type=checkbox]");
+                const listName = document.querySelector('#list_name');
 
                 let newList = {};
                 let newItems = [];
 
                 listRow.forEach(item => item.addEventListener('click', getItemData));
-                // listRow.forEach(listItem => listItem.addEventListener('change', selectItem));
-
-                // function to add the active class to selected list items
-                function selectItem() {
-                    this.classList.add('active');
-                }
-
+                
                 // function for the item checkboxes
                 function getItemData(e) {
                     if (!this.classList.contains('item-selected')) {
@@ -89,49 +52,20 @@
                         newItems = newItems.filter(item => item !== e.target.dataset.item_name);
                         console.log(newItems);
                     }
-
-                    function getChecks() {
-                        if (this.checked) {
-                            boxArr.push(this.value);
-                            console.log(boxArr);
-                            displayArray();
-                        } else {
-                            boxArr = boxArr.filter(item => item !== this.value);
-                            console.log(boxArr);
-                            displayArray();
-                        }
-                    }
-                    //if (this.checked) {
-                    //  newItems.push(this.value);
-
-                    //console.log(newItems);
-                    //} else {
-                    //  newItems = newItems.filter(item => item !== this.value);
-                    //console.log(newItems);
-                    //}
-                }
-
-
-
-                // get the list name input
-                const listName = document.querySelector('#list_name');
-                // select the buttons for click events
-                const itemButtons = document.querySelectorAll('.item-btn');
-                // add click listeners to each button
-                itemButtons.forEach(itemBtn => itemBtn.addEventListener('click', getData));
-
-                function getData(e) {
-                    // remove clicked item from DOM
-                    this.style.display = 'none';
-                    // get the new item data
-                    let newItem = e.target.dataset.item_name;
-                    // add it to the new items array
-                    newItems.push(newItem);
                 }
 
                 // function to handle the form submit after the new list has been created
                 // send new data to post route in the database to create new list
                 function addNewList() {
+                    // TO DO - make these alerts show in the DOM
+                    // check if list name is provided
+                    if(!listName.value) {
+                        return alert('please enter a list name.');
+                    }
+                    // check if anything has been selected from the list
+                    if(newItems === undefined || newItems.length == 0) {
+                        return alert('please select at least one item from the list.');
+                    }
 
                     newList = {
                         items: newItems,
@@ -139,7 +73,6 @@
                     }
 
                     $.ajax({
-
                         type: 'POST',
                         url: "/list/create",
                         data: newList,
@@ -149,12 +82,10 @@
                             window.location.href = "/board";
                         }
                     });
-
                 }
 
-
-
             </script>
+
         </div>
     </div>
 </div>
