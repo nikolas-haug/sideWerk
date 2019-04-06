@@ -79,9 +79,13 @@
                 }
 
                 // function for the item checkboxes
-                function getItemData(e) {
-                    console.log(e);
-                    this.classList.add('item-selected');
+                function getItemData() {
+                    if(!this.classList.contains('item-selected')) {
+                        this.classList.add('item-selected');
+                    } else {
+                        this.classList.remove('item-selected');
+                    }
+                    
                     //if (this.checked) {
                       //  newItems.push(this.value);
                         
