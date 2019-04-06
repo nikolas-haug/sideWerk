@@ -4,6 +4,7 @@
             <img class="header-img" src="/assets/images/logo.svg">
             <h1>Create New Board Page</h1>
 
+            {{!-- TO DO - add this to the main.css file --}}
             <style>
                 input[type=checkbox] {
                     color: #ccc;
@@ -15,8 +16,12 @@
                     color: #f00;
                     font-style: normal;
                 }
-            </style>
 
+                
+
+            </style>
+            
+            {{!-- TO DO - remove the excessive hrs --}}
             <hr>
 
             <a href="/home">Home</a>
@@ -38,10 +43,11 @@
 
             <ul class="list-group mt-5">
                 {{#each items}}
-                {{!-- <li class="list-group-item"> --}}
-                <input type="checkbox" name="checkbox" id="{{this.id}}" value="{{this.item_name}}">
-                <label for="{{this.id}}">{{this.item_name}}</label>
-                {{!-- </li> --}}
+                <li class="list-group-item" data-item_name="{{this.item_name}}">
+                    {{ this.item_name }}
+                    {{!-- <input type="checkbox" name="checkbox" id="{{this.id}}" value="{{this.item_name}}">
+                    <label for="{{this.id}}">{{this.item_name}}</label> --}}
+                </li>
                 {{/each}}
             </ul>
             {{!-- <ul class="list-group"> --}}
@@ -58,13 +64,13 @@
             <script>
 
                 // make the variables for the checkboxes and input field rows
-                // const listRow = document.querySelectorAll('.list-group-item');
-                const checkbox = document.querySelectorAll("input[type=checkbox]");
+                const listRow = document.querySelectorAll('.list-group-item');
+                // const checkbox = document.querySelectorAll("input[type=checkbox]");
 
                 let newList = {};
                 let newItems = [];
 
-                checkbox.forEach(box => box.addEventListener('change', getItemData));
+                listRow.forEach(item => item.addEventListener('click', getItemData));
                 // listRow.forEach(listItem => listItem.addEventListener('change', selectItem));
 
                 // function to add the active class to selected list items
@@ -73,14 +79,17 @@
                 }
 
                 // function for the item checkboxes
-                function getItemData() {
-                    if (this.checked) {
-                        newItems.push(this.value);
-                        console.log(newItems);
-                    } else {
-                        newItems = newItems.filter(item => item !== this.value);
-                        console.log(newItems);
-                    }
+                function getItemData(e) {
+                    console.log(e);
+                    this.classList.add('item-selected');
+                    //if (this.checked) {
+                      //  newItems.push(this.value);
+                        
+                        //console.log(newItems);
+                    //} else {
+                      //  newItems = newItems.filter(item => item !== this.value);
+                        //console.log(newItems);
+                    //}
                 }
 
             

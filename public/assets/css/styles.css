@@ -59,9 +59,9 @@ a:focus{
     color: #68C6C5;
     border-color: transparent;
 }
-.navbar-toggler:active{
+/* .navbar-toggler:active{
 
-}
+} */
 button:focus{
 	outline: 5px auto #68C6C5;
 }
@@ -83,3 +83,12 @@ button:focus{
 
 }
 
+/* CREATE LIST PAGE */
+
+.list-group-item {
+	background-color: transparent;
+}
+
+.item-selected {
+	background: green;
+}
