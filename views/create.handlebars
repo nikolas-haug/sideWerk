@@ -16,11 +16,8 @@
                     color: #f00;
                     font-style: normal;
                 }
-
-                
-
             </style>
-            
+
             {{!-- TO DO - remove the excessive hrs --}}
             <hr>
 
@@ -79,24 +76,42 @@
                 }
 
                 // function for the item checkboxes
-                function getItemData() {
-                    if(!this.classList.contains('item-selected')) {
+                function getItemData(e) {
+                    if (!this.classList.contains('item-selected')) {
                         this.classList.add('item-selected');
+                        // get the new item data
+                        let newItem = e.target.dataset.item_name;
+                        // add it to the new items array
+                        newItems.push(newItem);
+                        console.log(newItems);
                     } else {
                         this.classList.remove('item-selected');
+                        newItems = newItems.filter(item => item !== e.target.dataset.item_name);
+                        console.log(newItems);
                     }
-                    
+
+                    function getChecks() {
+                        if (this.checked) {
+                            boxArr.push(this.value);
+                            console.log(boxArr);
+                            displayArray();
+                        } else {
+                            boxArr = boxArr.filter(item => item !== this.value);
+                            console.log(boxArr);
+                            displayArray();
+                        }
+                    }
                     //if (this.checked) {
-                      //  newItems.push(this.value);
-                        
-                        //console.log(newItems);
+                    //  newItems.push(this.value);
+
+                    //console.log(newItems);
                     //} else {
-                      //  newItems = newItems.filter(item => item !== this.value);
-                        //console.log(newItems);
+                    //  newItems = newItems.filter(item => item !== this.value);
+                    //console.log(newItems);
                     //}
                 }
 
-            
+
 
                 // get the list name input
                 const listName = document.querySelector('#list_name');
