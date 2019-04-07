@@ -93,3 +93,34 @@ button:focus{
 	background: rgb(104, 198, 197);
 	color: #fff;
 }
+
+/* for the validation modal */
+.modal-div {
+	/* the modal is on top of the main content and covers the entire wieport*/
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, .8);
+	/* hide the modal window */
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity .2s, visibility .2s;
+}
+
+.modal-content {
+	/* center modal content */
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	/* content basic style */
+	text-align: center;
+	width: 90%;
+	max-width: 400px;
+	padding: 2em;
+	background-color: whitesmoke;
+	color: #333;
+  }

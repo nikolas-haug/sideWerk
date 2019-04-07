@@ -27,78 +27,11 @@
             <hr>
 
             <!-- Small modal -->
-            <button id="modal-btn" type="button">Open Modal</button>
             <div class="modal-div">
-                <h2>Javascript Modal Box</h2>
-                <p>You've opened the modal box!<br>Click to close me!</p>
+                <div class="modal-content">
+                    {{!-- modal content goes here --}}
+                </div>
             </div>
-
-            <style>
-                button {
-                    border: 0;
-                    padding: 10px;
-                    font-family: 'Source Sans Pro', Verdana, Sans-Serif;
-                    font-size: 18px;
-                    outline: none;
-                    border-radius: 3px;
-                    display: block;
-                    margin: 15px auto;
-                    background-color: #E3E3E3;
-                    cursor: pointer;
-                    transition: opacity 1s ease, transform 0.5s ease;
-                    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
-                }
-
-                button:active {
-                    box-shadow: 0 0 15px 0 lightgrey inset;
-                    background-color: #EBEBEB;
-                    transform: scale(1.15, 1.15);
-                    transition: transform 0s ease;
-                }
-
-                .modal-div {
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    /*must set position: relative for the body to remain behind the modal*/
-                    background-color: #3D3D3D;
-                    max-width: 600px;
-                    min-width: 150px;
-                    padding: 15px;
-                    text-align: center;
-                    margin: -50px auto 0 auto;
-                    border-radius: 5px;
-                    z-index: 4;
-                    visibility: hidden;
-                    opacity: 0;
-                    cursor: pointer;
-                    box-shadow: 0 0 5px 1px grey;
-                    transition: all 0.25s ease;
-                }
-
-                .modal-div::before {
-                    content: '';
-                    background-color: rgba(0, 0, 0, 0.5);
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    /*must set z-index: -1 to keep the backdrop behind the modal box*/
-                    z-index: -1;
-                }
-
-                h2 {
-                    font-family: 'Montserrat', Verdana, Sans-Serif;
-                    color: coral;
-                }
-
-                p {
-                    font-family: 'Source Sans Pro', Verdana, Sans-Serif;
-                    color: white;
-                }
-            </style>
 
             {{!-- start scripts --}}
             <script>
@@ -109,27 +42,20 @@
 
                 // varible for the modals
                 var modal = document.querySelector('.modal-div');
-                var button = document.querySelector('#modal-btn');
-
-                var open = function () {
+                
+                function openModal (message) {
                     modal.style.visibility = 'visible';
-                    modal.style.marginTop = '50px';
                     modal.style.opacity = '1';
-                    button.style.opacity = '0';
+                    document.querySelector('.modal-content').innerHTML = message;
                 };
-
-                button.addEventListener('click', open, false);
 
                 var close = function () {
                     modal.style.visibility = 'hidden';
-                    modal.style.marginTop = '-50px';
                     modal.style.opacity = '0';
-                    button.style.opacity = '1';
                 };
 
+                // TO DO - close the modal with click anywhere on page
                 modal.addEventListener('click', close, false);
-
-
 
                 let newList = {};
                 let newItems = [];
@@ -155,14 +81,13 @@
                 // function to handle the form submit after the new list has been created
                 // send new data to post route in the database to create new list
                 function addNewList() {
-                    // TO DO - make these alerts show in the DOM
                     // check if list name is provided
                     if (!listName.value) {
-                        return alert('please enter a list name.');
+                        return openModal('please enter a list name.');
                     }
                     // check if anything has been selected from the list
                     if (newItems === undefined || newItems.length == 0) {
-                        return alert('please select at least one item from the list.');
+                        return openModal('please select at least one item from the list.');
                     }
 
                     newList = {
