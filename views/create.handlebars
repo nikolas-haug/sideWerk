@@ -41,7 +41,7 @@
                 const listName = document.querySelector('#list_name');
 
                 // varible for the modals
-                var modal = document.querySelector('.modal-div');
+                const modal = document.querySelector('.modal-div');
                 
                 function openModal (message) {
                     modal.style.visibility = 'visible';
@@ -49,13 +49,13 @@
                     document.querySelector('.modal-content').innerHTML = message;
                 };
 
-                var close = function () {
+                function closeModal () {
                     modal.style.visibility = 'hidden';
                     modal.style.opacity = '0';
                 };
 
-                // TO DO - close the modal with click anywhere on page
-                modal.addEventListener('click', close, false);
+                // event listener for closing the modal
+                modal.addEventListener('click', closeModal, false);
 
                 let newList = {};
                 let newItems = [];
