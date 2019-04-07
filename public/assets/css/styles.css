@@ -90,5 +90,6 @@ button:focus{
 }
 
 .item-selected {
-	background: green;
+	background: rgb(104, 198, 197);
+	color: #fff;
 }
