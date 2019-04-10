@@ -1,5 +1,22 @@
-<h1>this is the navbar partial</h1>
+{{!-- flexbox navbar partial --}}
 
-{{#each items}}
-    <p>{{this.item_name}}</p>
-{{/each}}
+<div class="wrapper">
+
+    <div class="flex-nav-container">
+        <h1 class="logo">
+            <a href="#">Logo</a>
+        </h1>
+        <!-- mobile toggle button -->
+        <div class="nav-mobile-btn">
+            <a href="#!" id="nav-toggle"><span></span></a>
+        </div>
+        <ul class="main-navigation">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Demo</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+
+</div>
