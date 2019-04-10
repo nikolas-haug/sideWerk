@@ -57,9 +57,9 @@ a:focus {
 /* ==================== */
 
 .wrapper {
-	max-width: 1000px;
+	max-width: 85%;
 	margin: 0 auto;
-	padding: 50px;
+	/* padding: 50px; */
 }
 
 .flex-nav-container {
@@ -73,6 +73,7 @@ a:focus {
 
 .flex-nav-container .logo {
 	margin-left: 0.45em;
+	margin-bottom: 0;
 }
 
 .flex-nav-container .logo a {
@@ -83,7 +84,8 @@ a:focus {
 .flex-nav-container .main-navigation {
 	list-style: none;
 	text-transform: uppercase;
-	margin-left: auto;
+	/* margin-left: auto; */
+	margin: 0 0 0 auto;
 	display: flex;
 }
 
@@ -102,7 +104,7 @@ a:focus {
 .nav-mobile-btn {
 	display: none;
 	position: absolute;
-	top: 0;
+	top: -5px;
 	right: 0;
 	height: 50px;
 	width: 50px;
@@ -125,11 +127,15 @@ a:focus {
 	.nav-mobile-btn {
 		display: block;
 	}
+	.logo {
+		margin: 0;
+	}
 	.flex-nav-container .main-navigation {
 		flex-direction: column;
 		max-height: 0;
 		overflow: hidden;
 		transition: all 0.8s ease-in-out;
+		padding: 0;
 	}
 	.flex-nav-container .main-navigation a {
 		text-align: center;
@@ -143,6 +149,7 @@ a:focus {
 	.flex-nav-container .main-navigation.open-active {
 		display: block;
 		max-height: 100vh;
+		padding: 0;
 	}
 	#nav-toggle {
 		position: absolute;
