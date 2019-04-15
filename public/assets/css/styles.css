@@ -8,6 +8,17 @@ body{
 
 }
 
+/*FOOTER STYLES*/
+footer {
+	background-color: #231F20;
+}
+h5.footer{
+	color: white;
+}
+.text-uppercase{
+	color: white;
+}
+
 /*Typograpghy*/
 h1	{
 	font-family: 'Limelight', 'sans-serif';
@@ -42,6 +53,9 @@ a:hover{
 }
 a:focus{
 	color: #231F20;
+}
+.white-text {
+	color: white;
 }
 
 /*End of Universial Styles*/
@@ -126,3 +140,6 @@ button:focus{
 	background-color: whitesmoke;
 	color: #333;
   }
+
+
+  /*FOOTER */
